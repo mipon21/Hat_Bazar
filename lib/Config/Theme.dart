@@ -51,6 +51,7 @@ var darkTheme = ThemeData(
     primary: darkPrimaryColor,
     onBackground: dartOnBackgroundColor,
     primaryContainer: darkSecondaryColor,
+    onPrimaryContainer: onprimaryContainerColor
   ),
   textTheme: TextTheme(
     headlineMedium: TextStyle(
