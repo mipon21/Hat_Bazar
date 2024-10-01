@@ -2,8 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:hat_bazar/Config/Theme.dart';
-import 'package:hat_bazar/Pages/Web/HomePage.dart';
+import 'package:hat_bazar/Pages/Web/HomePage/HomePage.dart';
 import 'package:hat_bazar/Views/AuthView.dart';
+import 'package:hat_bazar/Views/HomeView.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,9 +15,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Hat Bazarr',
+      debugShowCheckedModeBanner: false,
+      title: 'Hat Bazar',
       theme: lightTheme,
-      home: Authview(),
+      themeMode: ThemeMode.system,
+      darkTheme: darkTheme,
+      home: const HomePageview(),
     );
   }
 }

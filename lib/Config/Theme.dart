@@ -7,7 +7,7 @@ var lightTheme = ThemeData(
   colorScheme: ColorScheme.light(
     background: backgroundColor,
     primary: primaryColor,
-    onBackground: onBackgroundColor,
+    onBackground: dartOnBackgroundColor,
     primaryContainer: primaryContainerColor,
     onPrimaryContainer: onprimaryContainerColor
   ),
@@ -16,7 +16,7 @@ var lightTheme = ThemeData(
       fontFamily: "Poppins",
       fontSize: 25,
       fontWeight: FontWeight.w500,
-      color: onBackgroundColor
+      color: dartOnBackgroundColor
     ),
     headlineSmall: TextStyle(
         fontFamily: "Poppins",
@@ -45,5 +45,44 @@ var lightTheme = ThemeData(
   ),
 );
 var darkTheme = ThemeData(
-    brightness: Brightness.dark
+    brightness: Brightness.dark,
+    colorScheme: ColorScheme.dark(
+    background: darkBgColor,
+    primary: darkPrimaryColor,
+    onBackground: dartOnBackgroundColor,
+    primaryContainer: darkSecondaryColor,
+  ),
+  textTheme: TextTheme(
+    headlineMedium: TextStyle(
+      fontFamily: "Poppins",
+      fontSize: 25,
+      fontWeight: FontWeight.w500,
+      color: dartOnBackgroundColor
+    ),
+    headlineSmall: TextStyle(
+        fontFamily: "Poppins",
+        fontSize: 20,
+        fontWeight: FontWeight.w500,
+        color: dartOnBackgroundColor
+    ),
+    bodyMedium: TextStyle(
+        fontFamily: "Poppins",
+        fontSize: 15,
+        fontWeight: FontWeight.w500,
+        color: dartOnBackgroundColor
+    ),
+    bodySmall: TextStyle(
+        fontFamily: "Poppins",
+        fontSize: 10,
+        fontWeight: FontWeight.w500,
+        color: dartOnBackgroundColor
+    ),
+    labelMedium: TextStyle(
+        fontFamily: "Poppins",
+        fontSize: 10,
+        fontWeight: FontWeight.w400,
+        color: dartOnBackgroundColor
+    ),
+  ),
+
 );
