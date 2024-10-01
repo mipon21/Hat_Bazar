@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Hat Bazar',
+      title: 'Hat Bazarr',
       theme: lightTheme,
       home: Authview(),
     );
