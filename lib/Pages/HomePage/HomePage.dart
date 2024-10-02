@@ -24,19 +24,17 @@ class Homepage extends StatelessWidget {
       body: SafeArea(
           child: Row(
         children: [
-          if(isDesktop)
-          Expanded(
-              child: Mydrawer()),
+          if (isDesktop) Expanded(child: Mydrawer()),
           Expanded(
               flex: 6,
               child: Column(
                 children: [
                   MyAppBar(),
-                  SizedBox(
-                    height: 50,
-                  ),
                   Padding(
-                      padding: const EdgeInsets.all(16.0), child: Dashboard())
+                      padding: const EdgeInsets.only(left: 16, top: 16),
+                      child: Consumer<DrawerProvider>(
+                          builder: (context, value, child) =>
+                              value.pages[value.selectedPageIndex]))
                 ],
               )),
         ],

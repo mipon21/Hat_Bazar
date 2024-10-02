@@ -17,6 +17,7 @@ class MyAppBar extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Row(
           children: [
+            if (isDesktop)
             SizedBox(
               width: 10,
             ),
@@ -41,7 +42,7 @@ class MyAppBar extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10),
                       color: Theme.of(context).colorScheme.primary,
                     ),
-                    child: Icon(Icons.search),
+                    child: Icon(Icons.search, color: Theme.of(context).colorScheme.onBackground),
                   )),
             )),
             if(isDesktop)

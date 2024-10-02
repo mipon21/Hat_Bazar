@@ -82,7 +82,7 @@ var darkTheme = ThemeData(
         fontFamily: "Poppins",
         fontSize: 10,
         fontWeight: FontWeight.w400,
-        color: dartOnBackgroundColor
+        color: onprimaryContainerColor
     ),
   ),
 
