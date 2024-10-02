@@ -5,9 +5,9 @@ import 'package:hat_bazar/Config/Colors.dart';
 var lightTheme = ThemeData(
   brightness: Brightness.light,
   colorScheme: ColorScheme.light(
-    background: backgroundColor,
+    surface: backgroundColor,
     primary: primaryColor,
-    onBackground: dartOnBackgroundColor,
+    onSurface: dartOnBackgroundColor,
     primaryContainer: primaryContainerColor,
     onPrimaryContainer: onprimaryContainerColor
   ),
@@ -16,7 +16,7 @@ var lightTheme = ThemeData(
       fontFamily: "Poppins",
       fontSize: 25,
       fontWeight: FontWeight.w500,
-      color: dartOnBackgroundColor
+      color: onBackgroundColor
     ),
     headlineSmall: TextStyle(
         fontFamily: "Poppins",
@@ -47,9 +47,9 @@ var lightTheme = ThemeData(
 var darkTheme = ThemeData(
     brightness: Brightness.dark,
     colorScheme: ColorScheme.dark(
-    background: darkBgColor,
+    surface: darkBgColor,
     primary: darkPrimaryColor,
-    onBackground: dartOnBackgroundColor,
+    onSurface: dartOnBackgroundColor,
     primaryContainer: darkSecondaryColor,
     onPrimaryContainer: onprimaryContainerColor
   ),

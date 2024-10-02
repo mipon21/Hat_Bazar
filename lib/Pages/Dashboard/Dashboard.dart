@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:hat_bazar/Config/AssetsPath.dart';
 import 'package:hat_bazar/Widgets/HomeStatics.dart';
+import 'package:hat_bazar/Widgets/OrderHistory.dart';
+import 'package:hat_bazar/Widgets/PrimaryBtn.dart';
 
 class Dashboard extends StatelessWidget {
   const Dashboard({super.key});
@@ -32,16 +34,31 @@ class Dashboard extends StatelessWidget {
 
     return Column(
       children: [
-        Row(
-          children: [
-            Container(
-              width: 7,
-              height: 40,
-              color: Theme.of(context).colorScheme.primary,
-            ),
-            const SizedBox(width: 10),
-            Text("Dashboard", style: Theme.of(context).textTheme.bodyMedium),
-          ],
+        Padding(
+          padding: const EdgeInsets.only(right: 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Row(
+                children: [
+                  Container(
+                    width: 7,
+                    height: 40,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                  const SizedBox(width: 10),
+                  Text("Dashboard",
+                      style: Theme.of(context).textTheme.bodyMedium),
+                ],
+              ),
+              PrimarBbtn(
+                onTap: () {}, 
+                name: "Create New", 
+                icon: Icons.add,
+                color: Theme.of(context).colorScheme.primary,
+                )
+            ],
+          ),
         ),
         const SizedBox(height: 30),
         Row(
@@ -54,8 +71,11 @@ class Dashboard extends StatelessWidget {
                     ),
                   ))
               .toList(),
-              
         ),
+        SizedBox(
+          height: 30,
+        ),
+        OrderHistory(),
       ],
     );
   }

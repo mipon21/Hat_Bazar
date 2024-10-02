@@ -30,11 +30,16 @@ class Homepage extends StatelessWidget {
               child: Column(
                 children: [
                   MyAppBar(),
-                  Padding(
-                      padding: const EdgeInsets.only(left: 16, top: 16),
-                      child: Consumer<DrawerProvider>(
-                          builder: (context, value, child) =>
-                              value.pages[value.selectedPageIndex]))
+                  SizedBox(height: 20,),
+                  Expanded(
+                    child: SingleChildScrollView(
+                      child: Padding(
+                          padding: const EdgeInsets.only(left: 16, top: 16),
+                          child: Consumer<DrawerProvider>(
+                              builder: (context, value, child) =>
+                                  value.pages[value.selectedPageIndex])),
+                    ),
+                  )
                 ],
               )),
         ],
