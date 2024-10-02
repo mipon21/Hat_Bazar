@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:hat_bazar/Config/AssetsPath.dart';
+import 'package:hat_bazar/Widgets/HoverEffect.dart';
 
 class RoundedSmallIconbtn extends StatelessWidget {
   final VoidCallback onTap;
@@ -14,15 +15,20 @@ class RoundedSmallIconbtn extends StatelessWidget {
   Widget build(BuildContext context) {
     return InkWell(
       onTap: onTap,
-      child: Container(
+      child: HoverEffect(
+        builder: (isHover) => AnimatedContainer(
+          duration: Duration(milliseconds: 400),
           padding: EdgeInsets.all(10),
           decoration: BoxDecoration(
-              color: color.withOpacity(0.2),
+              color: isHover
+                  ? color
+                  : color.withOpacity(0.3),
               borderRadius: BorderRadius.circular(10)),
           child: Icon(
             icon,
-            color: color,
+            color: Colors.white,
           )),
+        )
     );
   }
 }

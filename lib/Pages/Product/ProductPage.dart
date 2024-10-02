@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:hat_bazar/Config/PageRoutes.dart';
 import 'package:hat_bazar/Pages/Product/Widgets/ProductsTableData.dart';
 import 'package:hat_bazar/Widgets/OrderHistory.dart';
 import 'package:hat_bazar/Widgets/PrimaryBtn.dart';
@@ -54,7 +56,9 @@ class ProductPage extends StatelessWidget {
               width: 10,
             ),
             PrimarBbtn(
-              onTap: () {},
+              onTap: () {
+                context.go('/addProduct');
+              },
               name: "Add Product",
               icon: Icons.add,
               color: Theme.of(context).colorScheme.primary,
@@ -64,7 +68,9 @@ class ProductPage extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(height: 10,),
+        SizedBox(
+          height: 10,
+        ),
         ProductsTableData()
       ],
     );

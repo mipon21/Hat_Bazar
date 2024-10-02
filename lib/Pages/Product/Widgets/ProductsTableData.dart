@@ -143,19 +143,29 @@ class ProductDataSource extends DataGridSource {
               color: Colors.green.withOpacity(0.2)),
         );
       }
+      if (cell.columnName == "isActive") {
+        return Center(
+          child: Icon(
+            cell.value == true ?
+            Icons.done :
+            Icons.cancel,
+            color: cell.value == true ? Colors.green : Colors.red,
+          )
+        );
+      }
       if (cell.columnName == "action") {
         return Row(
           children: [
             RoundedSmallIconbtn(
-              onTap: () {}, 
-              icon: Icons.edit, 
-              color: Colors.green
-              ),
+                onTap: () {}, icon: Icons.edit, color: Colors.green),
             SizedBox(
-              width: 10,
+              width: 5,
             ),
-            IconButton(
-                onPressed: () {}, icon: Icon(Icons.zoom_out_map_rounded)),
+            RoundedSmallIconbtn(
+                onTap: () {}, icon: Icons.delete, color: Colors.red),
+            SizedBox(
+              width: 5,
+            ),
           ],
         );
       } else {

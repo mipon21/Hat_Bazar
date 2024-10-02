@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:hat_bazar/Config/PageRoutes.dart';
 import 'package:hat_bazar/Config/Theme.dart';
 import 'package:hat_bazar/Pages/HomePage/HomePage.dart';
 import 'package:hat_bazar/Providers/draverProvider.dart';
@@ -19,13 +20,13 @@ class MyApp extends StatelessWidget {
   const MyApp({super.key});
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       debugShowCheckedModeBanner: false,
       title: 'Hat Bazar',
       theme: lightTheme,
       themeMode: ThemeMode.system,
       darkTheme: darkTheme,
-      home: const Homepage(),
+      routerConfig: router,
     );
   }
 }
