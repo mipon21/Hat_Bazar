@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "488045321617",
+    "project_id": "hat-bazar-e-commerce",
+    "storage_bucket": "hat-bazar-e-commerce.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:488045321617:android:064f17c70133793ec58e30",
+        "android_client_info": {
+          "package_name": "com.hatbazar.admin.hat_bazar"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBEiLT9V_Ugf812vzwZoyBxVC5qUkBrQYs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

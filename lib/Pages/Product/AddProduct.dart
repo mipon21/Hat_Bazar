@@ -7,7 +7,9 @@ import 'package:hat_bazar/Config/PageRoutes.dart';
 import 'package:hat_bazar/Pages/Product/Widgets/MetaDetails.dart';
 import 'package:hat_bazar/Pages/Product/Widgets/ProductAmount.dart';
 import 'package:hat_bazar/Pages/Product/Widgets/ProdutDetails.dart';
+import 'package:hat_bazar/Providers/AddProductProvider.dart';
 import 'package:hat_bazar/Widgets/PrimaryBtn.dart';
+import 'package:provider/provider.dart';
 import 'package:textfield_tags/textfield_tags.dart';
 
 class AddProduct extends StatelessWidget {
@@ -16,10 +18,39 @@ class AddProduct extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _stringTagController = StringTagController();
+    final addProductProvider = Provider.of<AddProductProvider>(context);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primaryContainer,
         title: Text("Add Product"),
+        leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed: () {
+              context.pop();
+            }),
+        actions: [
+          PrimaryBtn(
+              onTap: () {
+                addProductProvider.printProductsDetails();
+              },
+              name: "Save",
+              icon: Icons.save,
+              color: Theme.of(context).colorScheme.primary),
+          SizedBox(
+            width: 10,
+          ),
+          PrimaryBtn(
+              onTap: () {
+                context.pop();
+              },
+              name: "Close",
+              icon: Icons.close,
+              color: Colors.red),
+          SizedBox(
+            width: 10,
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -31,29 +62,46 @@ class AddProduct extends StatelessWidget {
                 children: [
                   Expanded(
                       child: Column(
-                        children: [ProductDetails()],
-                      )),
-                  SizedBox(width: 10,),    
+                    children: [ProductDetails()],
+                  )),
+                  SizedBox(
+                    width: 10,
+                  ),
                   Expanded(
                       child: Column(
-                        children: [MetaDetails()],
-                      )),
+                    children: [MetaDetails()],
+                  )),
                 ],
               ),
-              SizedBox(height: 10,),
+              SizedBox(
+                height: 10,
+              ),
               ProductAmount(),
-              SizedBox(height: 10,),
+              SizedBox(
+                height: 10,
+              ),
               Container(
                 color: Theme.of(context).colorScheme.primaryContainer,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     PrimaryBtn(
-                      onTap: () {}, 
-                      name: "Add Product", 
-                      icon: Icons.add, 
-                      color: Theme.of(context).colorScheme.primary
+                        onTap: () {
+                          context.pop();
+                        },
+                        name: "Close",
+                        icon: Icons.close,
+                        color: Colors.red),
+                    SizedBox(
+                      width: 10,
                     ),
+                    PrimaryBtn(
+                        onTap: () {
+                          addProductProvider.printProductsDetails();
+                        },
+                        name: "Save",
+                        icon: Icons.save,
+                        color: Theme.of(context).colorScheme.primary),
                   ],
                 ),
               ),

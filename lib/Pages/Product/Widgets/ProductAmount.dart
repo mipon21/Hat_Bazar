@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:hat_bazar/Providers/AddProductProvider.dart';
+import 'package:provider/provider.dart';
 
 class ProductAmount extends StatelessWidget {
   const ProductAmount({
@@ -9,6 +11,7 @@ class ProductAmount extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final addProductProvider = Provider.of<AddProductProvider>(context);
     return Container(
       decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.primaryContainer),
@@ -52,9 +55,13 @@ class ProductAmount extends StatelessWidget {
                         ),
                         SizedBox(height: 10),
                         TextFormField(
+                          controller: addProductProvider.productPurchasePrice,
                           keyboardType: TextInputType.number,
                           decoration:
-                              InputDecoration(hintText: "Amount...."),
+                              InputDecoration(
+                                hintText: "Amount....",
+                                border: OutlineInputBorder(),
+                                ),
                           inputFormatters: <TextInputFormatter>[
                             FilteringTextInputFormatter.digitsOnly
                           ],
@@ -79,9 +86,11 @@ class ProductAmount extends StatelessWidget {
                         ),
                         SizedBox(height: 10),
                         TextFormField(
+                          controller: addProductProvider.productSellPrice,
                           keyboardType: TextInputType.number,
                           decoration:
-                              InputDecoration(hintText: "Amount...."),
+                              InputDecoration(hintText: "Amount....",   
+                              border: OutlineInputBorder()),
                           inputFormatters: <TextInputFormatter>[
                             FilteringTextInputFormatter.digitsOnly
                           ],
@@ -104,9 +113,11 @@ class ProductAmount extends StatelessWidget {
                         ),
                         SizedBox(height: 10),
                         TextFormField(
+                          controller: addProductProvider.productDiscountPrice,
                           keyboardType: TextInputType.number,
                           decoration:
-                              InputDecoration(hintText: "Amount...."),
+                              InputDecoration(hintText: "Amount....",
+                              border: OutlineInputBorder()),
                           inputFormatters: <TextInputFormatter>[
                             FilteringTextInputFormatter.digitsOnly
                           ],
@@ -127,9 +138,14 @@ class ProductAmount extends StatelessWidget {
               ),
               SizedBox(height: 10),
               TextFormField(
+                controller: addProductProvider.productTags,
+                keyboardType: TextInputType.text,
+                textAlign: TextAlign.left,
+                style: TextStyle(fontSize: 14),
                 maxLines: 3,
                 decoration: InputDecoration(
                   hintText: "Enter Tags",
+                  border: OutlineInputBorder(),
                 ),
               )
             ],

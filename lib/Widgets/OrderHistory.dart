@@ -31,6 +31,7 @@ class OrderHistory extends StatelessWidget {
           columns: [
             GridColumn(
                 allowFiltering: false,
+                
                 width: 100,
                 columnName: "id",
                 label: Container(
@@ -113,8 +114,7 @@ class ProductDataSource extends DataGridSource {
         .map<DataGridRow>((product) => DataGridRow(cells: [
               DataGridCell(columnName: "id", value: product.id),
               DataGridCell(columnName: "name", value: product.name),
-              DataGridCell(
-                  columnName: "purchasePrice", value: product.purchasePrice),
+              DataGridCell(columnName: "purchasePrice", value: product.purchasePrice),
               DataGridCell(columnName: "sellPrice", value: product.sellPrice),
               DataGridCell(columnName: "isActive", value: product.isActive),
               DataGridCell(columnName: "stock", value: product.stock),

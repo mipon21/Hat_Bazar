@@ -7,10 +7,23 @@ var lightTheme = ThemeData(
   colorScheme: ColorScheme.light(
     surface: backgroundColor,
     primary: primaryColor,
-    onSurface: dartOnBackgroundColor,
+    onSurface: onBackgroundColor,
     primaryContainer: primaryContainerColor,
     onPrimaryContainer: onprimaryContainerColor
   ),
+
+  inputDecorationTheme: InputDecorationTheme(
+    border: InputBorder.none,
+    fillColor: backgroundColor,
+    filled: true,
+    hintStyle: TextStyle(
+      fontFamily: "Poppins",
+      fontSize: 15,
+      fontWeight: FontWeight.w400,
+      color: darkOnPrimaryContainerColor
+    )
+  ),
+
   textTheme: TextTheme(
     headlineMedium: TextStyle(
       fontFamily: "Poppins",
@@ -53,6 +66,7 @@ var darkTheme = ThemeData(
     primaryContainer: darkSecondaryColor,
     onPrimaryContainer: onprimaryContainerColor
   ),
+
   inputDecorationTheme: InputDecorationTheme(
     border: InputBorder.none,
     fillColor: darkBgColor,
@@ -64,6 +78,7 @@ var darkTheme = ThemeData(
       color: darkOnPrimaryContainerColor
     )
   ),
+
   textTheme: TextTheme(
     headlineMedium: TextStyle(
       fontFamily: "Poppins",

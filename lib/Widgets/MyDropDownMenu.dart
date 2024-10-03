@@ -1,5 +1,6 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:hat_bazar/Widgets/HoverEffect.dart';
 
 class MyDropdownMenu extends StatefulWidget {
   final List<String> items;
@@ -29,10 +30,17 @@ class _MyDropdownMenuState extends State<MyDropdownMenu> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return HoverEffect(
+      builder: (isHover) {
+        return AnimatedContainer(
+      duration: Duration(milliseconds: 200),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.background,
-        borderRadius: BorderRadius.circular(10)
+        color: Theme.of(context).colorScheme.surface,
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(
+          color: isHover ? Theme.of(context).colorScheme.primary
+           : Theme.of(context).colorScheme.onPrimaryContainer
+          )
       ),
       child: DropdownButtonHideUnderline(
         child: DropdownButton2<String>(
@@ -114,5 +122,8 @@ class _MyDropdownMenuState extends State<MyDropdownMenu> {
         ),
       ),
     );
+  
+      }
+      );
   }
 }

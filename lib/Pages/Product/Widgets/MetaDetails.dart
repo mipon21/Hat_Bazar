@@ -5,8 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:hat_bazar/Const/Value.dart';
+import 'package:hat_bazar/Providers/AddProductProvider.dart';
 import 'package:hat_bazar/Widgets/HoverEffect.dart';
 import 'package:hat_bazar/Widgets/MyDropDownMenu.dart';
+import 'package:provider/provider.dart';
 
 class MetaDetails extends StatelessWidget {
   const MetaDetails({super.key});
@@ -23,43 +25,44 @@ class MetaDetails extends StatelessWidget {
       "Mass",
     ];
     var unitNames = [
-    // Length
-    "Millimeters (mm)",
-    "Centimeters (cm)",
-    "Meters (m)",
-    "Inches (in)",
-    "Feet (ft)",
-    
-    // Weight
-    "Grams (g)",
-    "Kilograms (kg)",
-    "Pounds (lbs)",
-    "Ounces (oz)",
-    
-    // Volume
-    "Milliliters (ml)",
-    "Liters (l)",
-    "Fluid Ounces (fl oz)",
-    "Gallons (gal)",
-    
-    // Area
-    "Square Millimeters (mm²)",
-    "Square Centimeters (cm²)",
-    "Square Meters (m²)",
-    "Square Inches (in²)",
-    "Square Feet (ft²)",
-    
-    // Count/Quantity
-    "Units (pcs)",
-    "Sets",
-    "Bundles",
-    
-    // Mass
-    "Grams (g)",
-    "Kilograms (kg)",
-    "Metric Tons (t)"
-];
+      // Length
+      "Piece",
+      "Millimeters (mm)",
+      "Centimeters (cm)",
+      "Meters (m)",
+      "Inches (in)",
+      "Feet (ft)",
 
+      // Weight
+      "Grams (g)",
+      "Kilograms (kg)",
+      "Pounds (lbs)",
+      "Ounces (oz)",
+
+      // Volume
+      "Milliliters (ml)",
+      "Liters (l)",
+      "Fluid Ounces (fl oz)",
+      "Gallons (gal)",
+
+      // Area
+      "Square Millimeters (mm²)",
+      "Square Centimeters (cm²)",
+      "Square Meters (m²)",
+      "Square Inches (in²)",
+      "Square Feet (ft²)",
+
+      // Count/Quantity
+      "Units (pcs)",
+      "Sets",
+      "Bundles",
+
+      // Mass
+      "Grams (g)",
+      "Kilograms (kg)",
+      "Metric Tons (t)"
+    ];
+    final addProductProvider = Provider.of<AddProductProvider>(context);
 
     return Container(
       padding: EdgeInsets.all(10),
@@ -96,8 +99,57 @@ class MetaDetails extends StatelessWidget {
                 ),
                 SizedBox(height: 10),
                 InkWell(
-                  onTap: (){},
-                  child: DottedBorder(
+                    onTap: () {
+                      addProductProvider.pickImage();
+                    },
+                    child: DottedBorder(
+                      radius: Radius.circular(10),
+                      color: Theme.of(context)
+                          .colorScheme
+                          .onBackground
+                          .withOpacity(0.5),
+                      strokeWidth: 1,
+                      dashPattern: [5, 7],
+                      child: HoverEffect(
+                        builder: (isHover) => AnimatedContainer(
+                          decoration: BoxDecoration(
+                              color: isHover
+                                  ? Theme.of(context)
+                                      .colorScheme
+                                      .background
+                                      .withOpacity(0.5)
+                                  : Colors.transparent),
+                          duration: DefaultValue.animationDuration,
+                          height: 150,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.cloud_upload_outlined,
+                                    color: Theme.of(context)
+                                        .colorScheme
+                                        .onPrimaryContainer,
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                    "Click here to Upload Image",
+                                    style:
+                                        Theme.of(context).textTheme.labelLarge,
+                                  )
+                                ],
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    )),
+                SizedBox(height: 10),
+                DottedBorder(
                     radius: Radius.circular(10),
                     color: Theme.of(context)
                         .colorScheme
@@ -105,68 +157,65 @@ class MetaDetails extends StatelessWidget {
                         .withOpacity(0.5),
                     strokeWidth: 1,
                     dashPattern: [5, 7],
-                    child: HoverEffect(
-                      builder: (isHover) => AnimatedContainer(
-                      decoration: BoxDecoration(
-                        color: isHover ? Theme.of(context).colorScheme.background.withOpacity(0.5)
-                                       : Colors.transparent
-                      ),  
-                      duration: DefaultValue.animationDuration,
-                      height: 150,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.cloud_upload_outlined,
-                                color: Theme.of(context)
-                                    .colorScheme
-                                    .onPrimaryContainer,
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Text(
-                                "Click here to Upload Image",
-                                style: Theme.of(context).textTheme.labelLarge,
+                    child: Consumer<AddProductProvider>(
+                        builder: (context, value, child) {
+                      return Container(
+                        height: 110,
+                        padding: EdgeInsets.all(5),
+                        child: value.images.isEmpty
+                            ? Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text(
+                                        "No image",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .labelLarge,
+                                      )
+                                    ],
+                                  )
+                                ],
                               )
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                 ) 
-                ),
-                SizedBox(height: 10),
-                DottedBorder(
-                  radius: Radius.circular(10),
-                  color: Theme.of(context)
-                      .colorScheme
-                      .onBackground
-                      .withOpacity(0.5),
-                  strokeWidth: 1,
-                  dashPattern: [5, 7],
-                  child: Container(
-                    height: 110,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              "No image",
-                              style: Theme.of(context).textTheme.labelLarge,
-                            )
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                ),
+                            : Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceAround,
+                                children: value.images.map((e) {
+                                  return HoverEffect(builder: (isHover) {
+                                    return Stack(
+                                      children: [
+                                        Container(
+                                            decoration: BoxDecoration(
+                                                color: Theme.of(context)
+                                                    .colorScheme
+                                                    .primary
+                                                    .withOpacity(0.2)),
+                                            height: 100,
+                                            width: 100,
+                                            child: Image.network(e)),
+                                        Positioned(
+                                            top: 0,
+                                            right: 0,
+                                            child: isHover
+                                                ? InkWell(
+                                                    onTap: () {
+                                                      addProductProvider
+                                                          .removeImage(e);
+                                                    },
+                                                    child: Container(
+                                                      child: Icon(Icons.close),
+                                                    ),
+                                                  )
+                                                : Container())
+                                      ],
+                                    );
+                                  });
+                                }).toList(),
+                              ),
+                      );
+                    })),
                 SizedBox(height: 20),
                 Row(
                   children: [
@@ -178,8 +227,12 @@ class MetaDetails extends StatelessWidget {
                 ),
                 SizedBox(height: 10),
                 TextFormField(
+                  controller: addProductProvider.productStock,
                   keyboardType: TextInputType.number,
-                  decoration: InputDecoration(hintText: "Stock...."),
+                  decoration: InputDecoration(
+                    hintText: "Stock....",
+                    border: OutlineInputBorder(),
+                    ),
                   inputFormatters: <TextInputFormatter>[
                     FilteringTextInputFormatter.digitsOnly
                   ],
@@ -188,7 +241,7 @@ class MetaDetails extends StatelessWidget {
                   children: [
                     Expanded(
                         child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.stretch, 
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         SizedBox(height: 20),
                         Row(
@@ -203,14 +256,20 @@ class MetaDetails extends StatelessWidget {
                         MyDropdownMenu(
                             items: unitTypes,
                             hintText: "Select Unit Type",
-                            valueChanged: (value) {}),
+                            valueChanged: (unitType) {
+                              if (unitType != null) {
+                                addProductProvider.selectedUnitType = unitType;
+                              }
+                            }),
                       ],
                     )),
-                    SizedBox(width: 20,),
+                    SizedBox(
+                      width: 20,
+                    ),
                     Expanded(
-                      child: Column(
+                        child: Column(
                       mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,  
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         SizedBox(height: 20),
                         Row(
@@ -225,7 +284,11 @@ class MetaDetails extends StatelessWidget {
                         MyDropdownMenu(
                             items: unitNames,
                             hintText: "Select Unit Name",
-                            valueChanged: (value) {}),
+                            valueChanged: (unit) {
+                              if (unit != null) {
+                                addProductProvider.selectedUnit = unit;
+                              }
+                            }),
                       ],
                     )),
                   ],
