@@ -9,3 +9,4 @@ const darkPrimaryColor = Color(0xff019934);
 const darkSecondaryColor = Color(0xff2a203e);
 const dartOnBackgroundColor = Color(0xffFFFFFF);
 const darkBgColor = Color(0xff212332);
+const darkOnPrimaryContainerColor = Color(0xff8E8E8E);

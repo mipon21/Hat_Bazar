@@ -46,7 +46,7 @@ class ProductPage extends StatelessWidget {
             SizedBox(
               width: 10,
             ),
-            PrimarBbtn(
+            PrimaryBtn(
               onTap: () {},
               name: "Export",
               icon: Icons.import_export_sharp,
@@ -55,9 +55,9 @@ class ProductPage extends StatelessWidget {
             SizedBox(
               width: 10,
             ),
-            PrimarBbtn(
+            PrimaryBtn(
               onTap: () {
-                context.go('/addProduct');
+                context.push('/addProduct');
               },
               name: "Add Product",
               icon: Icons.add,

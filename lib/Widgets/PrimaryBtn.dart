@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:hat_bazar/Widgets/HoverEffect.dart';
 
-class PrimarBbtn extends StatelessWidget {
+class PrimaryBtn extends StatelessWidget {
   final VoidCallback onTap;
   final String name;
   final IconData icon;
   final Color color;
-  const PrimarBbtn(
+  const PrimaryBtn(
       {super.key, required this.onTap, required this.name, 
       required this.icon, required this.color});
 

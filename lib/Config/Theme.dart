@@ -53,6 +53,17 @@ var darkTheme = ThemeData(
     primaryContainer: darkSecondaryColor,
     onPrimaryContainer: onprimaryContainerColor
   ),
+  inputDecorationTheme: InputDecorationTheme(
+    border: InputBorder.none,
+    fillColor: darkBgColor,
+    filled: true,
+    hintStyle: TextStyle(
+      fontFamily: "Poppins",
+      fontSize: 15,
+      fontWeight: FontWeight.w400,
+      color: darkOnPrimaryContainerColor
+    )
+  ),
   textTheme: TextTheme(
     headlineMedium: TextStyle(
       fontFamily: "Poppins",
@@ -81,6 +92,12 @@ var darkTheme = ThemeData(
     labelMedium: TextStyle(
         fontFamily: "Poppins",
         fontSize: 10,
+        fontWeight: FontWeight.w400,
+        color: onprimaryContainerColor
+    ),
+    labelLarge: TextStyle(
+        fontFamily: "Poppins",
+        fontSize: 15,
         fontWeight: FontWeight.w400,
         color: onprimaryContainerColor
     ),

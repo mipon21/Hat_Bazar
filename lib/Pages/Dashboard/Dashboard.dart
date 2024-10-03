@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:hat_bazar/Config/AssetsPath.dart';
 import 'package:hat_bazar/Widgets/HomeStatics.dart';
 import 'package:hat_bazar/Widgets/OrderHistory.dart';
 import 'package:hat_bazar/Widgets/PrimaryBtn.dart';
+import 'package:hat_bazar/Widgets/Rounded_Small_IconBtn.dart';
 
 class Dashboard extends StatelessWidget {
   const Dashboard({super.key});
@@ -37,7 +39,6 @@ class Dashboard extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(right: 10),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Row(
                 children: [
@@ -47,33 +48,49 @@ class Dashboard extends StatelessWidget {
                     color: Theme.of(context).colorScheme.primary,
                   ),
                   const SizedBox(width: 10),
-                  Text("Dashboard",
+                  Text("Dashboard Overview",
                       style: Theme.of(context).textTheme.bodyMedium),
                 ],
               ),
-              PrimarBbtn(
-                onTap: () {}, 
-                name: "Create New", 
-                icon: Icons.add,
-                color: Theme.of(context).colorScheme.primary,
-                )
             ],
           ),
         ),
-        const SizedBox(height: 30),
-        Row(
-          children: statics
-              .map((e) => Expanded(
-                    child: HomeStatics(
-                      lable: e["label"]!,
-                      value: e["value"]!,
-                      icon: e["icon"]!,
-                    ),
-                  ))
-              .toList(),
-        ),
         SizedBox(
           height: 30,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            RoundedSmallIconbtn(
+              onTap: () {},
+              icon: Icons.refresh,
+              color: Colors.orange,
+            ),
+            SizedBox(
+              width: 10,
+            ),
+            PrimaryBtn(
+              onTap: () {},
+              name: "Export",
+              icon: Icons.import_export_sharp,
+              color: Colors.deepPurple,
+            ),
+            SizedBox(
+              width: 10,
+            ),
+            PrimaryBtn(
+              onTap: () {},
+              name: "Import",
+              icon: Icons.download,
+              color: Theme.of(context).colorScheme.primary,
+            ),
+            SizedBox(
+              width: 10,
+            ),
+          ],
+        ),
+        SizedBox(
+          height: 10,
         ),
         OrderHistory(),
       ],

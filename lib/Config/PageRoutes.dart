@@ -8,7 +8,7 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: '/',
       builder: (context, state) => 
-      Homepage(),
+      AddProduct(),
     ),
     GoRoute(
       path: '/addProduct',
