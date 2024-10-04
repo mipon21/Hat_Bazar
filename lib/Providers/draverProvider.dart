@@ -6,7 +6,7 @@ import 'package:hat_bazar/Pages/Product/ProductPage.dart';
 import 'package:hat_bazar/Pages/Settings/SettingsPage.dart';
 
 class DrawerProvider extends ChangeNotifier {
-  int _selectedPageIndex = 0;
+  int _selectedPageIndex = 2;
 
   int get selectedPageIndex => _selectedPageIndex;
 

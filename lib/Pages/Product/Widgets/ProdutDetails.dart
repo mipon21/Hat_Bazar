@@ -6,9 +6,7 @@ import 'package:hat_bazar/Widgets/MyDropDownMenu.dart';
 import 'package:provider/provider.dart';
 
 class ProductDetails extends StatelessWidget {
-  const ProductDetails({
-    super.key,
-  });
+  const ProductDetails({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +18,10 @@ class ProductDetails extends StatelessWidget {
       "Beauty & Personal Care",
       "Kitchen & Dining",
     ];
+    
+    // Access the provider
     final addProductProvider = Provider.of<AddProductProvider>(context);
+    
     return Container(
       padding: EdgeInsets.all(10),
       decoration:
@@ -31,10 +32,31 @@ class ProductDetails extends StatelessWidget {
             child: Column(
               children: [
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Icon(Icons.dashboard),
+                    Row(
+                      children: [
+                        Icon(Icons.dashboard),
+                        SizedBox(width: 10),
+                        Text("Product Details"),
+                      ],
+                    ),
                     SizedBox(width: 10),
-                    Text("Product Details")
+                    Row(
+                      children: [
+                        Text("Active"),
+                        Transform.scale(
+                          scale: 0.5,
+                          child: Switch(
+                            value: addProductProvider.isActive, // Bind to provider
+                            onChanged: (value) {
+                              // Update provider state when switch is toggled
+                              addProductProvider.isActive = value;
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
                 SizedBox(height: 10),
@@ -56,7 +78,7 @@ class ProductDetails extends StatelessWidget {
                 ),
                 SizedBox(height: 10),
                 TextFormField(
-                  controller: addProductProvider.productName,
+                  controller: addProductProvider.productName, // Set controller from provider
                   decoration: InputDecoration(
                     hintText: 'Product Name...',
                     border: OutlineInputBorder(),
@@ -73,7 +95,7 @@ class ProductDetails extends StatelessWidget {
                 ),
                 SizedBox(height: 10),
                 TextFormField(
-                  controller: addProductProvider.productDescription,
+                  controller: addProductProvider.productDescription, // Set controller from provider
                   maxLines: 5,
                   decoration: InputDecoration(
                     hintText: 'Description...',
@@ -94,20 +116,21 @@ class ProductDetails extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     MyDropdownMenu(
-                        items: category,
-                        hintText: "Select a category",
-                        valueChanged: (categoty) {
-                              if(categoty != null) {
-                                addProductProvider.selectedCategory = categoty;
-                            }
-                        }),
+                      items: category,
+                      hintText: "Select a category",
+                      valueChanged: (category) {
+                        if (category != null) {
+                          addProductProvider.selectedCategory = category;
+                        }
+                      },
+                    ),
                   ],
                 ),
                 SizedBox(height: 20),
                 Row(
                   children: [
                     Text(
-                      "SubCategory",
+                      "Sub Category",
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ],
@@ -117,28 +140,36 @@ class ProductDetails extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     MyDropdownMenu(
-                        items: category,
-                        hintText: "Select a Subcategory",
-                        valueChanged: (subcategoty) {
-                              if(subcategoty != null) {
-                                addProductProvider.selectedSubCategory = subcategoty;
-                            }
-                        }),
+                      items: category,
+                      hintText: "Select a Subcategory",
+                      valueChanged: (subCategory) {
+                        if (category != null) {
+                          addProductProvider.selectedSubCategory = subCategory;
+                        }
+                      },
+                    ),
                   ],
                 ),
                 SizedBox(height: 20),
                 Row(
                   children: [
-                    Text("Active",),
-                    Transform.scale(
-                      scale: 0.5,
-                      child: Switch(value: true, onChanged: (value){}),
-                    )
+                    Text(
+                      "Seller Name",
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
                   ],
+                ),
+                SizedBox(height: 10),
+                TextFormField(
+                  controller: addProductProvider.sellerName, // Set controller from provider
+                  decoration: InputDecoration(
+                    hintText: 'Seller Name...',
+                    border: OutlineInputBorder(),
+                  ),
                 ),
               ],
             ),
-          )
+          ),
         ],
       ),
     );

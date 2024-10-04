@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hat_bazar/Config/CustomNotification.dart';
 import 'package:hat_bazar/Config/PageRoutes.dart';
 import 'package:hat_bazar/Pages/Product/Widgets/MetaDetails.dart';
 import 'package:hat_bazar/Pages/Product/Widgets/ProductAmount.dart';
@@ -30,13 +31,18 @@ class AddProduct extends StatelessWidget {
               context.pop();
             }),
         actions: [
-          PrimaryBtn(
-              onTap: () {
-                addProductProvider.printProductsDetails();
-              },
-              name: "Save",
-              icon: Icons.save,
-              color: Theme.of(context).colorScheme.primary),
+          Consumer<AddProductProvider>(builder: (context, value, child) {
+            if (value.isLoading) {
+              return CircularProgressIndicator();
+            }
+            return PrimaryBtn(
+                onTap: () {
+                  addProductProvider.addProduct();
+                },
+                name: "Save",
+                icon: Icons.save,
+                color: Theme.of(context).colorScheme.primary);
+          }),
           SizedBox(
             width: 10,
           ),
@@ -95,13 +101,19 @@ class AddProduct extends StatelessWidget {
                     SizedBox(
                       width: 10,
                     ),
-                    PrimaryBtn(
-                        onTap: () {
-                          addProductProvider.printProductsDetails();
-                        },
-                        name: "Save",
-                        icon: Icons.save,
-                        color: Theme.of(context).colorScheme.primary),
+                    Consumer<AddProductProvider>(
+                        builder: (context, value, child) {
+                      if (value.isLoading) {
+                        return CircularProgressIndicator();
+                      }
+                      return PrimaryBtn(
+                          onTap: () {
+                            addProductProvider.addProduct();
+                          },
+                          name: "Save",
+                          icon: Icons.save,
+                          color: Theme.of(context).colorScheme.primary);
+                    })
                   ],
                 ),
               ),

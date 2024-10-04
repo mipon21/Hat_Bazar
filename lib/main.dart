@@ -6,6 +6,7 @@ import 'package:hat_bazar/Config/PageRoutes.dart';
 import 'package:hat_bazar/Config/Theme.dart';
 import 'package:hat_bazar/Pages/HomePage/HomePage.dart';
 import 'package:hat_bazar/Providers/AddProductProvider.dart';
+import 'package:hat_bazar/Providers/CategoryProvider.dart';
 import 'package:hat_bazar/Providers/draverProvider.dart';
 import 'package:hat_bazar/firebase_options.dart';
 import 'package:provider/provider.dart';
@@ -18,6 +19,7 @@ void main() async {
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: (_) => DrawerProvider()),
     ChangeNotifierProvider(create: (_) => AddProductProvider()),
+    ChangeNotifierProvider(create: (_) => CategoryProvider()),
   ], child: const MyApp()));
 }
 
@@ -29,7 +31,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Hat Bazar',
       theme: lightTheme,
-      themeMode: ThemeMode.dark,
+      themeMode: ThemeMode.light,
       darkTheme: darkTheme,
       routerConfig: router,
     );

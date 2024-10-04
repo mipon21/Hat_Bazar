@@ -20,51 +20,89 @@ class Mydrawer extends StatelessWidget {
               DrawerHeader(
                   child: SvgPicture.asset(
                 IconAssets.appIcon,
+                fit: BoxFit.contain,
               )),
-              MyDrawerMenu(
-                title: "Dashboard",
-                icon: IconAssets.catagory,
-                onPressed: () {
-                  drawerProvider.selectMenu(0); // Use the new method
-                  Scaffold.of(context).closeDrawer();
-                },
-                isSelected: drawerProvider.selectedPageIndex == 0,
-              ),
-              MyDrawerMenu(
-                title: "Products",
-                icon: IconAssets.person,
-                onPressed: () {
-                  drawerProvider.selectMenu(1);
-                  Scaffold.of(context).closeDrawer();
-                },
-                isSelected: drawerProvider.selectedPageIndex == 1,
-              ),
-              MyDrawerMenu(
-                title: "Catagory",
-                icon: IconAssets.shop,
-                onPressed: () {
-                  drawerProvider.selectMenu(2);
-                  Scaffold.of(context).closeDrawer();
-                },
-                isSelected: drawerProvider.selectedPageIndex == 2,
-              ),
-              MyDrawerMenu(
-                title: "Coupons",
-                icon: IconAssets.coupons,
-                onPressed: () {
-                  drawerProvider.selectMenu(3);
-                  Scaffold.of(context).closeDrawer();
-                },
-                isSelected: drawerProvider.selectedPageIndex == 3,
-              ),
-              MyDrawerMenu(
-                title: "Settings",
-                icon: IconAssets.settings,
-                onPressed: () {
-                  drawerProvider.selectMenu(4);
-                  Scaffold.of(context).closeDrawer();
-                },
-                isSelected: drawerProvider.selectedPageIndex == 4,
+              Container(
+                padding: EdgeInsets.all(5),
+                child: Column(
+                  children: [
+                    TextFormField(
+                      decoration: InputDecoration(
+                          hintText: "Search here...",
+                          fillColor: Theme.of(context).colorScheme.background,
+                          filled: true,
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide.none),
+                          prefixIcon: Icon(
+                            Icons.search,
+                            color: Theme.of(context)
+                                .colorScheme
+                                .onPrimaryContainer,
+                          )),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    MyDrawerMenu(
+                      title: "Dashboard",
+                      icon: IconAssets.catagory,
+                      onPressed: () {
+                        drawerProvider.selectMenu(0); // Use the new method
+                        Scaffold.of(context).closeDrawer();
+                      },
+                      isSelected: drawerProvider.selectedPageIndex == 0,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    MyDrawerMenu(
+                      title: "Products",
+                      icon: IconAssets.person,
+                      onPressed: () {
+                        drawerProvider.selectMenu(1);
+                        Scaffold.of(context).closeDrawer();
+                      },
+                      isSelected: drawerProvider.selectedPageIndex == 1,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    MyDrawerMenu(
+                      title: "Catagory",
+                      icon: IconAssets.shop,
+                      onPressed: () {
+                        drawerProvider.selectMenu(2);
+                        Scaffold.of(context).closeDrawer();
+                      },
+                      isSelected: drawerProvider.selectedPageIndex == 2,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    MyDrawerMenu(
+                      title: "Coupons",
+                      icon: IconAssets.coupons,
+                      onPressed: () {
+                        drawerProvider.selectMenu(3);
+                        Scaffold.of(context).closeDrawer();
+                      },
+                      isSelected: drawerProvider.selectedPageIndex == 3,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    MyDrawerMenu(
+                      title: "Settings",
+                      icon: IconAssets.settings,
+                      onPressed: () {
+                        drawerProvider.selectMenu(4);
+                        Scaffold.of(context).closeDrawer();
+                      },
+                      isSelected: drawerProvider.selectedPageIndex == 4,
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

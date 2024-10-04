@@ -8,9 +8,11 @@ class Product {
   double? sellPrice;
   double? purchasePrice;
   String? unit;
+  String? unitType;
   double? unitPrice;
   List<String>? tags;
   String? category;
+  String? subCategory;
   List<String>? images;
   String? cratedAt;
   String? updatedAt;
@@ -30,9 +32,11 @@ class Product {
       this.sellPrice,
       this.purchasePrice,
       this.unit,
+      this.unitType,
       this.unitPrice,
       this.tags,
       this.category,
+      this.subCategory,
       this.images,
       this.cratedAt,
       this.updatedAt,
@@ -74,6 +78,10 @@ class Product {
       unit = json['unit'];
     }
 
+    if (json['unitType'] is String) {
+      unitType = json['unitType'];
+    }
+
     if (json['unitPrice'] is double) {
       unitPrice = (json['unitPrice'] as num).toDouble();
     }
@@ -84,6 +92,10 @@ class Product {
 
     if (json['category'] is String) {
       category = json['category'];
+    }
+
+    if (json['subCategory'] is String) {
+      subCategory = json['subCategory'];
     }
 
     if (json['images'] is List) {
@@ -139,10 +151,12 @@ class Product {
     data['purchasePrice'] = this.purchasePrice;
     data['unit'] = this.unit;
     data['unitPrice'] = this.unitPrice;
+    data['unitType'] = this.unitType;
     if (this.tags != null) {
       data['tags'] = this.tags;
     }
     data['category'] = this.category;
+    data['subCategory'] = this.subCategory;
     if (this.images != null) {
       data['images'] = this.images;
     }

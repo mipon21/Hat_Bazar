@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:hat_bazar/Pages/Category/AddCategory.dart';
 import 'package:hat_bazar/Pages/HomePage/HomePage.dart';
 import 'package:hat_bazar/Pages/Product/AddProduct.dart';
 
@@ -8,12 +9,17 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: '/',
       builder: (context, state) => 
-      AddProduct(),
+      Homepage(),
     ),
     GoRoute(
       path: '/addProduct',
       builder: (context, state) => 
       AddProduct(),
+    ),
+    GoRoute(
+      path: '/addCategory',
+      builder: (context, state) => 
+      AddCategory(),
     ),
   ],
 );
