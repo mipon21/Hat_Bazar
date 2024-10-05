@@ -7,7 +7,7 @@ import 'package:hat_bazar/Config/CustomNotification.dart';
 import 'package:hat_bazar/Config/PageRoutes.dart';
 import 'package:hat_bazar/Pages/Category/Widgets/CategoryDetails.dart';
 import 'package:hat_bazar/Pages/Product/Widgets/MetaDetails.dart';
-import 'package:hat_bazar/Pages/Product/Widgets/ProductAmount.dart';
+import 'package:hat_bazar/Pages/Product/Widgets/ProductAmountDetails.dart';
 import 'package:hat_bazar/Pages/Product/Widgets/ProdutDetails.dart';
 import 'package:hat_bazar/Providers/AddProductProvider.dart';
 import 'package:hat_bazar/Providers/CategoryProvider.dart';
@@ -26,7 +26,6 @@ class AddCategory extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.primaryContainer,
-        title: Text("Add Product"),
         leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () {

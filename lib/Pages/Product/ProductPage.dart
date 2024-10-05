@@ -4,6 +4,7 @@ import 'package:hat_bazar/Config/PageRoutes.dart';
 import 'package:hat_bazar/Pages/Product/Widgets/ProductsTableData.dart';
 import 'package:hat_bazar/Widgets/OrderHistory.dart';
 import 'package:hat_bazar/Widgets/PrimaryBtn.dart';
+import 'package:hat_bazar/Widgets/ResponsiveLayout.dart';
 import 'package:hat_bazar/Widgets/Rounded_Small_IconBtn.dart';
 
 class ProductPage extends StatelessWidget {
@@ -11,6 +12,7 @@ class ProductPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDesktop = Responsivelayout.isDesktop(context);
     return Column(
       children: [
         Padding(

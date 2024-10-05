@@ -1,17 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hat_bazar/Pages/Category/Widgets/CategoryDataTable.dart';
+import 'package:hat_bazar/Providers/CategoryProvider.dart';
 import 'package:hat_bazar/Widgets/PrimaryBtn.dart';
 import 'package:hat_bazar/Widgets/Rounded_Small_IconBtn.dart';
+import 'package:provider/provider.dart';
 
 
 class CategoryPage extends StatelessWidget {
   const CategoryPage({super.key});
-
+  
   @override
   Widget build(BuildContext context) {
+    final CategoryProvider categoryProvider = Provider.of<CategoryProvider>(context, listen: false);
     return Column(
       children: [
+        Consumer<CategoryProvider>(
+          builder: (context, value, child) {
+            return value.isLoading ? LinearProgressIndicator() : SizedBox();
+          },
+        ),
         Padding(
           padding: const EdgeInsets.only(right: 10),
           child: Row(
@@ -38,7 +46,9 @@ class CategoryPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             RoundedSmallIconbtn(
-              onTap: () {},
+              onTap: () {
+                categoryProvider.addCategoriesBulk(context);
+              },
               icon: Icons.refresh,
               color: Colors.orange,
             ),
@@ -70,7 +80,11 @@ class CategoryPage extends StatelessWidget {
         SizedBox(
           height: 10,
         ),
-        CategoryTableData()
+        Consumer<CategoryProvider>(
+          builder: (context, value, child) {
+            return value.isLoading ? SizedBox() : CategoryTableData();
+          },
+        )
       ],
     );
   }

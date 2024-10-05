@@ -3,6 +3,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:hat_bazar/Config/AssetsPath.dart';
 import 'package:hat_bazar/Providers/draverProvider.dart';
 import 'package:hat_bazar/Widgets/MyDrawerMenu.dart';
+import 'package:hat_bazar/Widgets/ThemeChangerBtn.dart';
 import 'package:provider/provider.dart';
 
 class Mydrawer extends StatelessWidget {
@@ -16,6 +17,7 @@ class Mydrawer extends StatelessWidget {
         width: 250,
         child: SingleChildScrollView(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               DrawerHeader(
                   child: SvgPicture.asset(
@@ -100,10 +102,11 @@ class Mydrawer extends StatelessWidget {
                         Scaffold.of(context).closeDrawer();
                       },
                       isSelected: drawerProvider.selectedPageIndex == 4,
-                    ),
+                    ),                  
                   ],
                 ),
               ),
+              ThemeChangeBtn()
             ],
           ),
         ),

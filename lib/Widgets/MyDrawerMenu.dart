@@ -26,7 +26,7 @@ class MyDrawerMenu extends StatelessWidget {
           title,
           style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                 color: isSelected 
-                  ? Theme.of(context).colorScheme.onBackground
+                  ? Colors.white
                   : Theme.of(context).colorScheme.onPrimaryContainer,
               ),
         ),
@@ -36,7 +36,7 @@ class MyDrawerMenu extends StatelessWidget {
         leading: SvgPicture.asset(
           icon,
           color: isSelected 
-              ? Theme.of(context).colorScheme.onBackground
+              ? Colors.white
               : Theme.of(context).colorScheme.onPrimaryContainer,
         ),
         selected: isSelected,

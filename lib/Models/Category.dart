@@ -12,7 +12,8 @@ class Category {
     this.title, 
     this.value, 
     this.coverUrl,
-    this.subCategories});
+    this.subCategories
+  });
 
   // fromJson method
   Category.fromJson(Map<String, dynamic> json) {
@@ -33,8 +34,10 @@ class Category {
           .map<SubCategory>((x) => SubCategory.fromJson(x))
           .toList();
     }
+    
+    // Corrected assignment of coverUrl
     if (json['coverUrl'] is String) {
-      value = json['coverUrl'];
+      coverUrl = json['coverUrl'];
     }
   }
 
@@ -45,6 +48,7 @@ class Category {
     data['title'] = this.title;
     data['value'] = this.value;
     data['coverUrl'] = this.coverUrl;
+    
     if (subCategories != null) {
       data['subCategories'] = subCategories!.map((x) => x.toJson()).toList();
     }

@@ -14,4 +14,6 @@ class IconAssets {
   static String delete_red = "${basePath}delete_red.svg";
   static String pencil = "${basePath}pencil.svg";
   static String zoom_in = "${basePath}zoom_in.svg";
+  static String dark = "${basePath}dark.svg";
+  static String light = "${basePath}light.svg";
 }

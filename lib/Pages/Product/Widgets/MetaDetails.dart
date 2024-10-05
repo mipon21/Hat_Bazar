@@ -8,6 +8,7 @@ import 'package:hat_bazar/Const/Value.dart';
 import 'package:hat_bazar/Providers/AddProductProvider.dart';
 import 'package:hat_bazar/Widgets/HoverEffect.dart';
 import 'package:hat_bazar/Widgets/MyDropDownMenu.dart';
+import 'package:hat_bazar/Widgets/ResponsiveLayout.dart';
 import 'package:provider/provider.dart';
 
 class MetaDetails extends StatelessWidget {
@@ -63,7 +64,7 @@ class MetaDetails extends StatelessWidget {
       "Metric Tons (t)"
     ];
     final addProductProvider = Provider.of<AddProductProvider>(context);
-
+    final isDesktop = Responsivelayout.isDesktop(context);
     return Container(
       padding: EdgeInsets.all(10),
       decoration:
@@ -179,41 +180,47 @@ class MetaDetails extends StatelessWidget {
                                   )
                                 ],
                               )
-                            : Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: value.images.map((e) {
-                                  return HoverEffect(builder: (isHover) {
-                                    return Stack(
-                                      children: [
-                                        Container(
-                                            decoration: BoxDecoration(
-                                                color: Theme.of(context)
-                                                    .colorScheme
-                                                    .primary
-                                                    .withOpacity(0.2)),
-                                            height: 100,
-                                            width: 100,
-                                            child: Image.memory(e)),
-                                        Positioned(
-                                            top: 0,
-                                            right: 0,
-                                            child: isHover
-                                                ? InkWell(
-                                                    onTap: () {
-                                                      addProductProvider
-                                                          .removeImage(e);
-                                                    },
-                                                    child: Container(
-                                                      child: Icon(Icons.close),
-                                                    ),
-                                                  )
-                                                : Container())
-                                      ],
-                                    );
-                                  });
-                                }).toList(),
-                              ),
+                            : SingleChildScrollView(
+                              scrollDirection: Axis.horizontal,
+                              child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: value.images.map((e) {
+                                    return HoverEffect(builder: (isHover) {
+                                      return Stack(
+                                        children: [
+                                          Container(
+                                            margin: EdgeInsets.all(5),
+                                              decoration: BoxDecoration(
+                                                  color: Theme.of(context)
+                                                      .colorScheme
+                                                      .primary
+                                                      .withOpacity(0.2)),
+                                              height: 100,
+                                              width: 100,
+                                              child: Image.memory(e)),
+                                          Positioned(
+                                              top: 5,
+                                              right: 5,
+                                              child: isHover || !isDesktop
+                                                  ? InkWell(
+                                                      onTap: () {
+                                                        addProductProvider
+                                                            .removeImage(e);
+                                                      },
+                                                      child: Container(
+                                                        child: isDesktop 
+                                                        ? Icon(Icons.close,) 
+                                                        : Icon(Icons.cancel, color: Colors.red,),
+                                                      ),
+                                                    )
+                                                  : Container())
+                                        ],
+                                      );
+                                    });
+                                  }).toList(),
+                                ),
+                            ),
                       );
                     })),
                 SizedBox(height: 20),
@@ -232,67 +239,128 @@ class MetaDetails extends StatelessWidget {
                   decoration: InputDecoration(
                     hintText: "Stock....",
                     border: OutlineInputBorder(),
-                    ),
+                  ),
                   inputFormatters: <TextInputFormatter>[
                     FilteringTextInputFormatter.digitsOnly
                   ],
                 ),
-                Row(
-                  children: [
-                    Expanded(
-                        child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        SizedBox(height: 20),
-                        Row(
-                          children: [
-                            Text(
-                              "Unit Type:",
-                              style: Theme.of(context).textTheme.bodyMedium,
-                            )
-                          ],
-                        ),
-                        SizedBox(height: 10),
-                        MyDropdownMenu(
-                            items: unitTypes,
-                            hintText: "Select Unit Type",
-                            valueChanged: (unitType) {
-                              if (unitType != null) {
-                                addProductProvider.selectedUnitType = unitType;
-                              }
-                            }),
-                      ],
-                    )),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Expanded(
-                        child: Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        SizedBox(height: 20),
-                        Row(
-                          children: [
-                            Text(
-                              "Unit Name:",
-                              style: Theme.of(context).textTheme.bodyMedium,
-                            )
-                          ],
-                        ),
-                        SizedBox(height: 10),
-                        MyDropdownMenu(
-                            items: unitNames,
-                            hintText: "Select Unit Name",
-                            valueChanged: (unit) {
-                              if (unit != null) {
-                                addProductProvider.selectedUnit = unit;
-                              }
-                            }),
-                      ],
-                    )),
-                  ],
-                )
+                isDesktop
+                    ? Row(
+                        children: [
+                          Expanded(
+                              child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              SizedBox(height: 20),
+                              Row(
+                                children: [
+                                  Text(
+                                    "Unit Type:",
+                                    style:
+                                        Theme.of(context).textTheme.bodyMedium,
+                                  )
+                                ],
+                              ),
+                              SizedBox(height: 10),
+                              MyDropdownMenu(
+                                  items: unitTypes,
+                                  hintText: "Select Unit Type",
+                                  valueChanged: (unitType) {
+                                    if (unitType != null) {
+                                      addProductProvider.selectedUnitType =
+                                          unitType;
+                                    }
+                                  }),
+                            ],
+                          )),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Expanded(
+                              child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              SizedBox(height: 20),
+                              Row(
+                                children: [
+                                  Text(
+                                    "Unit Name:",
+                                    style:
+                                        Theme.of(context).textTheme.bodyMedium,
+                                  )
+                                ],
+                              ),
+                              SizedBox(height: 10),
+                              MyDropdownMenu(
+                                  items: unitNames,
+                                  hintText: "Select Unit Name",
+                                  valueChanged: (unit) {
+                                    if (unit != null) {
+                                      addProductProvider.selectedUnit = unit;
+                                    }
+                                  }),
+                            ],
+                          )),
+                        ],
+                      )
+                    : Column(
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              SizedBox(height: 20),
+                              Row(
+                                children: [
+                                  Text(
+                                    "Unit Type:",
+                                    style:
+                                        Theme.of(context).textTheme.bodyMedium,
+                                  )
+                                ],
+                              ),
+                              SizedBox(height: 10),
+                              MyDropdownMenu(
+                                  items: unitTypes,
+                                  hintText: "Select Unit Type",
+                                  valueChanged: (unitType) {
+                                    if (unitType != null) {
+                                      addProductProvider.selectedUnitType =
+                                          unitType;
+                                    }
+                                  }),
+                            ],
+                          ),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.stretch,
+                            children: [
+                              SizedBox(height: 20),
+                              Row(
+                                children: [
+                                  Text(
+                                    "Unit Name:",
+                                    style:
+                                        Theme.of(context).textTheme.bodyMedium,
+                                  )
+                                ],
+                              ),
+                              SizedBox(height: 10),
+                              MyDropdownMenu(
+                                  items: unitNames,
+                                  hintText: "Select Unit Name",
+                                  valueChanged: (unit) {
+                                    if (unit != null) {
+                                      addProductProvider.selectedUnit = unit;
+                                    }
+                                  }),
+                            ],
+                          ),
+                        ],
+                      )
               ],
             ),
           )

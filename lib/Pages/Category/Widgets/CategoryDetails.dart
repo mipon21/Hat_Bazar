@@ -16,7 +16,7 @@ class CategoryDetails extends StatelessWidget {
     final categoryProvider = Provider.of<CategoryProvider>(context);
 
     return Container(
-      height: 600,
+      height: 640,
       width: 600,
       padding: EdgeInsets.all(20),
       decoration: BoxDecoration(

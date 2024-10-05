@@ -6,6 +6,10 @@ import 'package:uuid/uuid.dart';
 import '../models/Category.dart';
 
 class CategoryProvider extends ChangeNotifier {
+  CategoryProvider() {
+    getAllCategories();
+  }
+
   TextEditingController categoryName = TextEditingController();
   TextEditingController subCategory = TextEditingController();
   final Uuid uuid = Uuid();
@@ -13,11 +17,53 @@ class CategoryProvider extends ChangeNotifier {
 
   List<SubCategory> subCategories = [];
   bool isLoading = false;
+  List<Category> categories = [];
+
+  Future<void> getAllCategories() async {
+    isLoading = true;
+    notifyListeners();
+    
+    categories.clear(); // Clear previous categories
+    try {
+      var categoryDocs = await db.collection("Categories").orderBy("id").get();
+      categories = categoryDocs.docs.map((doc) => Category.fromJson(doc.data() as Map<String, dynamic>)).toList();
+    } catch (ex) {
+      print("Error fetching categories: $ex");
+      print("Failed to fetch categories. Please try again.");
+    } finally {
+      isLoading = false;
+      notifyListeners();
+    }
+  }
+
+  Future<void> addCategoriesBulk(BuildContext context) async {
+    if (categories.isEmpty) {
+      errorMessage(context, "No categories to add.");
+      return;
+    }
+
+    isLoading = true;
+    notifyListeners();
+
+    try {
+      for (var category in categories) {
+        await db.collection("Categories").doc(category.id).set(category.toJson());
+        print("Category added: ${category.id}");
+      }
+      successMessage(context, "Categories added successfully");
+    } catch (ex) {
+      errorMessage(context, "Error adding categories: $ex");
+    } finally {
+      isLoading = false;
+      notifyListeners();
+    }
+  }
 
   Future<void> addCategory(BuildContext context) async {
     isLoading = true;
     notifyListeners();
-    if (subCategories.isNotEmpty || categoryName.text.isNotEmpty) {
+
+    if (subCategories.isNotEmpty && categoryName.text.isNotEmpty) {
       String id = uuid.v4();
       Category newCategory = Category(
         id: id,
@@ -25,13 +71,19 @@ class CategoryProvider extends ChangeNotifier {
         value: categoryName.text.toLowerCase().replaceAll(' ', '-'),
         subCategories: subCategories,
       );
+
       try {
         await db.collection("Categories").doc(id).set(newCategory.toJson());
-      } catch (ex) {}
-      successMessage(context, "Category added successfully");
+        successMessage(context, "Category added successfully");
+        categoryName.clear();
+        subCategories.clear();
+      } catch (ex) {
+        errorMessage(context, "Error adding category: $ex");
+      }
     } else {
-      errorMessage(context, "Please add at least one sub category");
+      errorMessage(context, "Please add at least one subcategory and a category name.");
     }
+
     isLoading = false;
     notifyListeners();
   }
